@@ -220,7 +220,9 @@ def get_handwritten(link,num_words,input_file,output_dir,x_offset=0,y_offset=0,h
             ax[i].set_axis_off()
             i=i+1
             #Save the plot as HandwrittenText.png
-        fig.savefig('HandwrittenText.png',dpi=1200)
+        # random int 
+        rnd_int = random.randint(1, 1000000000)
+        fig.savefig(f'HandwrittenText-{rnd_int}.png',dpi=1200)
         img_path = filename
         file_head,file_tail = os.path.splitext(filename)
         boxed_file = file_head + '-boxed' + file_tail
@@ -230,7 +232,7 @@ def get_handwritten(link,num_words,input_file,output_dir,x_offset=0,y_offset=0,h
         #Convert from RGBA to RGB
         img_ecg = img_ecg.convert('RGB')
         #Load the generated handwritten text image
-        img_handwritten = Image.open('HandwrittenText.png')
+        img_handwritten = Image.open(f'HandwrittenText-{rnd_int}.png')
         #Convert the generated handwritten text image to RGB
         img_handwritten = img_handwritten.convert('RGB')
         #Resize the handwritten text image
@@ -261,6 +263,6 @@ def get_handwritten(link,num_words,input_file,output_dir,x_offset=0,y_offset=0,h
         plt.clf()
         plt.cla()
         
-        os.remove('HandwrittenText.png')
+        os.remove(f'HandwrittenText-{rnd_int}.png')
         outfile = os.path.join(output_dir,tail)
         return outfile
